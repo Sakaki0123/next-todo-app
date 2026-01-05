@@ -11,7 +11,7 @@ const tasks: Task[] = [
 ];
 
 export const GET = async () => {
-    return NextResponse.json(tasks);
+    return NextResponse.json({"tasks": tasks});
 };
 
 export const dynamic = 'force-dynamic'; // キャッシュ無効化
