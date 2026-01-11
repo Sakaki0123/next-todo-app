@@ -13,7 +13,7 @@ const tasks: Task[] = [
 const sleep = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
 
 export const GET = async () => {
-    await sleep(1000); // 1秒待機
+    await sleep(3000);
     return NextResponse.json({"tasks": tasks});
 };
 
