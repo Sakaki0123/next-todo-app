@@ -35,8 +35,6 @@ export const updateTask = async (id: string, state: FormState, formData: FormDat
         isCompleted: Boolean(formData.get("isCompleted")),
     }
 
-    console.log("Updating task with ID:", id, "and data:", updateTask);
-
     try {
         await connectDb();
         await TaskModel.updateOne({ _id: id }, updateTask);

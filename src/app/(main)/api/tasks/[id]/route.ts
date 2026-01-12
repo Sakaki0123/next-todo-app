@@ -1,6 +1,5 @@
 import { TaskModel } from "@/models/task";
 import { connectDb } from "@/utils/database";
-import { redirect } from "next/dist/server/api-utils";
 import { NextResponse } from "next/server";
 
 export const GET = async (
