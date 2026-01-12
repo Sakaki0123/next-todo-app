@@ -1,5 +1,5 @@
 'use server';
-import  {TaskModel, Task } from "@/models/task";
+import { TaskModel, Task } from "@/models/task";
 import { connectDb } from "@/utils/database";
 import { redirect } from "next/navigation";
 
@@ -8,7 +8,7 @@ export interface FormState {
 }
 
 export const createTask = async (state: FormState, formData: FormData) => {
-    const newTask:Task = {
+    const newTask: Task = {
         title: formData.get("title") as string,
         description: formData.get("description") as string,
         dueDate: formData.get("dueDate") as string,
@@ -21,6 +21,28 @@ export const createTask = async (state: FormState, formData: FormData) => {
     }
     catch (error) {
         state.error = "Failed to create task.";
+        return state;
+    }
+
+    redirect('/');
+};
+
+export const updateTask = async (id: string, state: FormState, formData: FormData) => {
+    const updateTask: Task = {
+        title: formData.get("title") as string,
+        description: formData.get("description") as string,
+        dueDate: formData.get("dueDate") as string,
+        isCompleted: Boolean(formData.get("isCompleted")),
+    }
+
+    console.log("Updating task with ID:", id, "and data:", updateTask);
+
+    try {
+        await connectDb();
+        await TaskModel.updateOne({ _id: id }, updateTask);
+    }
+    catch (error) {
+        state.error = "Failed to update task.";
         return state;
     }
 

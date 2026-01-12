@@ -5,6 +5,7 @@ import TaskEditButton from "./TaskEditButton/TaskEditButton"
 interface TaskCardProps {
     task: TaskDocument;
 }
+
 const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
     return (
         <div className="w-64 h-52 p-4 bg-white rounded-md shadow-md flex flex-col justify-between">
@@ -19,8 +20,8 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
                         {task.isCompleted ? 'completed' : 'imcomplete'}
                     </div>
                     <div className="flex gap-4">
-                        <TaskEditButton id='1'/>
-                        <TaskDeleteButton id='1'/>
+                        <TaskEditButton id={task._id.toString()} />
+                        <TaskDeleteButton id={task._id.toString()} />
                     </div>
                 </div>
             </div>
