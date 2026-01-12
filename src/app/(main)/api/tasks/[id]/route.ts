@@ -22,11 +22,12 @@ export const GET = async (
 
 export const DELETE = async (
     _: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) => {
     try {
         await connectDb();
-        const result = await TaskModel.deleteOne({ _id: params.id });
+        const { id } = await params;
+        const result = await TaskModel.deleteOne({ _id: id });
         if (result.deletedCount === 0) {
             return NextResponse.json({ message: "Task not found" }, { status: 404 });
         }
