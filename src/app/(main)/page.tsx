@@ -11,6 +11,7 @@ const getAllTasks = async (): Promise<TaskDocument[]> => {
     const data = await response.json();
     return data.data as TaskDocument[];
 }
+
 export default async function MainPage() {
     const allTasks = await getAllTasks();
     return (

@@ -21,8 +21,8 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({ id, task }) => {
     const [isCompleted, setIsCompleted] = useState(task.isCompleted);
 
     const updateTaskWithId = updateTask.bind(null, id);
-    const initialForm: FormState = { error: "" };
-    const [state, formAction] = useFormState(updateTaskWithId, initialForm);
+    const initialState: FormState = { error: "" };
+    const [state, formAction] = useFormState(updateTaskWithId, initialState);
     const SubmitButton = () => {
         const { pending } = useFormStatus();
         return (
