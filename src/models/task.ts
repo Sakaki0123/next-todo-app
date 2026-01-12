@@ -3,7 +3,7 @@ import mongoose, { Document } from 'mongoose';
 export interface Task {
     title: string;
     description: string;
-    dueDate: Date;
+    dueDate: string;
     isCompleted: boolean;
 }
 
@@ -15,10 +15,8 @@ export interface TaskDocument extends Task, Document {
 const taskSchema = new mongoose.Schema<TaskDocument>({
     title: { type: String, required: true },
     description: { type: String, required: true },
-    dueDate: { type: Date, required: true },
+    dueDate: { type: String, required: true },
     isCompleted: { type: Boolean, required: true, default: false },
 }, { timestamps: true });
 
-const TaskModel = mongoose.models.Task || mongoose.model<TaskDocument>('Task', taskSchema);
-
-export default TaskModel;
+export const TaskModel = mongoose.models.Task || mongoose.model<TaskDocument>('Task', taskSchema);
