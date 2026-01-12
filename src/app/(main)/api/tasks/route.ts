@@ -11,7 +11,6 @@ export const GET = async (_: Request) => {
         console.error("Error fetching tasks:", error);
         return NextResponse.json({ message: "Failed to fetch tasks" }, { status: 500 });
     }
-
 };
 
 export const dynamic = 'force-dynamic';
