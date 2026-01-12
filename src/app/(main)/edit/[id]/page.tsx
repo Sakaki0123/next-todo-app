@@ -2,12 +2,13 @@
 import EditTaskForm from "@/components/EditTaskForm/EditTaskForm";
 
 interface Params {
-    params: {
+    params: Promise<{
         id: string;
-    }
+    }>;
 }
 
 const getTask = async (id: string) => {
+    console.log("getTask id:", id);
     const res = await fetch(`${process.env.API_URL}/tasks/${id}`, { cache: 'no-store' });
     if (!res.ok) {
         throw new Error("Failed to fetch tasks");
@@ -18,7 +19,8 @@ const getTask = async (id: string) => {
 
 
 const EditTaskPage = async ({ params }: Params) => {
-    const id = params.id;
+    const { id } = await params;
+    console.log("EditTaskPage id:", id);
     const task = await getTask(id);
     return (
         <div className="flex flex-col justify-center py-20">
