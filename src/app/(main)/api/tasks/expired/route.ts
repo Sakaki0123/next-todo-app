@@ -3,9 +3,15 @@ import { connectDb } from "@/utils/database";
 import { NextResponse } from "next/server";
 
 export const GET = async (_: Request) => {
+    const currentDate = new Date().toLocaleDateString('ja-JP', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    }).replace(/\//g, '-');
     try {
         await connectDb();
         const allTasks: TaskDocument[] = await TaskModel.find({
+            dueDate: { $lt: currentDate },
             isCompleted: false
         });
         return NextResponse.json({ message: "Success to get tasks", data: allTasks }, { status: 200 });
